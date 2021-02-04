@@ -22,9 +22,9 @@ public class SpringIonicApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Categoria cat01 = new Categoria(null, "Informatica");
-        Categoria cat02 = new Categoria(null, "Financeiro");
-        Categoria cat03 = new Categoria(null, "Markenting");
+        Categoria cat01 = new Categoria(null, "Informatica",null);
+        Categoria cat02 = new Categoria(null, "Financeiro", null);
+        Categoria cat03 = new Categoria(null, "Markenting", null);
 
         categoriaRepository.saveAll(Arrays.asList(cat01,cat02,cat03));
     }

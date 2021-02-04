@@ -12,10 +12,9 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Categoria implements Serializable {
+public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +22,8 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
-    @OneToMany(mappedBy = "categoria")
-    private Set<ProdutoCategoria> produtosCategoria;
+    private Double preco;
+    @OneToMany(mappedBy = "produto")
+    private Set<ProdutoCategoria> categoriasProduto;
 
 }
