@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 @Entity
 public class Categoria implements Serializable {
@@ -24,6 +24,6 @@ public class Categoria implements Serializable {
     private Integer id;
     private String nome;
     @OneToMany(mappedBy = "categoria")
-    private Set<ProdutoCategoria> produtosCategoria;
+    private Set<ProdutoCategoria> produtosCategoria = new HashSet<>();
 
 }
