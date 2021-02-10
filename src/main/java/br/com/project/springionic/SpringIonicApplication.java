@@ -53,5 +53,10 @@ public class SpringIonicApplication implements CommandLineRunner {
         produtoCategoria.setCategoria(cat01);
         produtoCategoria.setProduto(produto01);
         produtoCategoriaRepository.save(produtoCategoria);
+
+        ProdutoCategoria produtoCategoria02 = new ProdutoCategoria();
+        produtoCategoria.setCategoria(cat02);
+        produtoCategoria.setProduto(produto02);
+        produtoCategoriaRepository.save(produtoCategoria02);
     }
 }
