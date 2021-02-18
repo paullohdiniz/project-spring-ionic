@@ -1,11 +1,7 @@
 package br.com.project.springionic;
 
-import br.com.project.springionic.controller.domain.Categoria;
-import br.com.project.springionic.controller.domain.Produto;
-import br.com.project.springionic.controller.domain.ProdutoCategoria;
-import br.com.project.springionic.repository.CategoriaRepository;
-import br.com.project.springionic.repository.ProdutoCategoriaRepository;
-import br.com.project.springionic.repository.ProdutoRepository;
+import br.com.project.springionic.controller.domain.*;
+import br.com.project.springionic.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +20,10 @@ public class SpringIonicApplication implements CommandLineRunner {
     private ProdutoRepository produtoRepository;
     @Autowired
     private ProdutoCategoriaRepository produtoCategoriaRepository;
+    @Autowired
+    private EstadoRepository estadoRepository;
+    @Autowired
+    private CidadeRepository cidadeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringIonicApplication.class, args);
@@ -58,5 +58,18 @@ public class SpringIonicApplication implements CommandLineRunner {
         produtoCategoria.setCategoria(cat02);
         produtoCategoria.setProduto(produto02);
         produtoCategoriaRepository.save(produtoCategoria02);
+
+        Estado est01 = new Estado(null, "Minas Gerais", null);
+        Estado est02 = new Estado(null, "Sao Paulo", null);
+
+        Cidade cid01 = new Cidade(null, "Uberlandia", est01);
+        Cidade cid02 = new Cidade(null, "Sao Paulo", est02);
+        Cidade cid03 = new Cidade(null, "Campinas", est02);
+
+        est01.getCidades().addAll(Arrays.asList(cid01));
+        est02.getCidades().addAll(Arrays.asList(cid02,cid03));
+
+        estadoRepository.saveAll(Arrays.asList(est01,est02));
+        cidadeRepository.saveAll(Arrays.asList(cid01,cid02,cid03));
     }
 }
