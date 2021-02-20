@@ -19,6 +19,7 @@ public class ClienteService {
         Optional<Cliente> obj = clienteRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Nao Encontado"));
     }
+    
     public List<Cliente> findAll(){
         List<Cliente> clientList = clienteRepository.findAll();
         return clientList;
