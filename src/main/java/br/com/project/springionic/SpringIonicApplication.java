@@ -24,6 +24,10 @@ public class SpringIonicApplication implements CommandLineRunner {
     private EstadoRepository estadoRepository;
     @Autowired
     private CidadeRepository cidadeRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringIonicApplication.class, args);
@@ -61,15 +65,29 @@ public class SpringIonicApplication implements CommandLineRunner {
 
         Estado est01 = new Estado(null, "Minas Gerais", null);
         Estado est02 = new Estado(null, "Sao Paulo", null);
-
+//
         Cidade cid01 = new Cidade(null, "Uberlandia", est01);
         Cidade cid02 = new Cidade(null, "Sao Paulo", est02);
         Cidade cid03 = new Cidade(null, "Campinas", est02);
-
-        est01.getCidades().addAll(Arrays.asList(cid01));
-        est02.getCidades().addAll(Arrays.asList(cid02,cid03));
-
+//
+        est01.setCidades(Arrays.asList(cid01));
+        est02.setCidades(Arrays.asList(cid02,cid03));
+//
         estadoRepository.saveAll(Arrays.asList(est01,est02));
         cidadeRepository.saveAll(Arrays.asList(cid01,cid02,cid03));
+
+        Set<String> telefones = new HashSet<>();
+        telefones.add("11948475478");
+        telefones.add("11958652145");
+
+        Cliente cli = new Cliente(null, "Paulo Diniz", "paullo@gmail.com", "05503455575", TipoClienteEnum.PESSOA_FISICA,null, telefones);
+
+        Endereco end01 = new Endereco(null, "Rua Flores","400","Apt 01", "Jardim", "011652145", cli, cid01);
+        Endereco end02 = new Endereco(null, "Rua Ministro","25","Beco", "Jardins", "05365215", cli, cid02);
+
+        cli.setEnderecos(Arrays.asList(end01, end02));
+
+        clienteRepository.saveAll(Arrays.asList(cli));
+        enderecoRepository.saveAll(Arrays.asList(end01,end02));
     }
 }
