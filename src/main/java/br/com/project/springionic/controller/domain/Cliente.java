@@ -1,5 +1,6 @@
 package br.com.project.springionic.controller.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ public class Cliente implements Serializable {
     private String cpfCnpj;
     private TipoClienteEnum tipoClienteEnum;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
