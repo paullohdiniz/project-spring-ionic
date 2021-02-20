@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +29,10 @@ public class SpringIonicApplication implements CommandLineRunner {
     private ClienteRepository clienteRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringIonicApplication.class, args);
@@ -80,7 +85,7 @@ public class SpringIonicApplication implements CommandLineRunner {
         telefones.add("11948475478");
         telefones.add("11958652145");
 
-        Cliente cli = new Cliente(null, "Paulo Diniz", "paullo@gmail.com", "05503455575", TipoClienteEnum.PESSOA_FISICA,null, telefones);
+        Cliente cli = new Cliente(null, "Paulo Diniz", "paullo@gmail.com", "05503455575", TipoClienteEnum.PESSOA_FISICA,null, telefones, null);
 
         Endereco end01 = new Endereco(null, "Rua Flores","400","Apt 01", "Jardim", "011652145", cli, cid01);
         Endereco end02 = new Endereco(null, "Rua Ministro","25","Beco", "Jardins", "05365215", cli, cid02);
@@ -89,5 +94,20 @@ public class SpringIonicApplication implements CommandLineRunner {
 
         clienteRepository.saveAll(Arrays.asList(cli));
         enderecoRepository.saveAll(Arrays.asList(end01,end02));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Pedido ped01 = new Pedido(null, sdf.parse("20/02/2021 10:20"), null, cli, end01);
+        Pedido ped02 = new Pedido(null, sdf.parse("19/02/2021 10:20"), null, cli, end02);
+
+        Pagamento pag01 = new PagamentoComCartao(null, EstadoPagamentoEnum.PENDENTE, ped01, 3, sdf.parse("21/02/2021 11:22"));
+        ped01.setPagamento(pag01);
+
+        Pagamento pag02 = new PagamentoComBoleto(null, EstadoPagamentoEnum.QUITADO, ped02, sdf.parse("21/02/2021 11:22"), sdf.parse("25/02/2021 11:22"));
+        ped02.setPagamento(pag02);
+
+        cli.setPedidos(Arrays.asList(ped01,ped02));
+
+        pedidoRepository.saveAll(Arrays.asList(ped01,ped02));
+        pagamentoRepository.saveAll(Arrays.asList(pag01,pag02));
     }
 }
