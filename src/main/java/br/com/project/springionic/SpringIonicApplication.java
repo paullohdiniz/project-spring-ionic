@@ -33,6 +33,8 @@ public class SpringIonicApplication implements CommandLineRunner {
     private PedidoRepository pedidoRepository;
     @Autowired
     private PagamentoRepository pagamentoRepository;
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringIonicApplication.class, args);
@@ -44,9 +46,9 @@ public class SpringIonicApplication implements CommandLineRunner {
         Categoria cat01 = new Categoria(null, "Informatica",null);
         Categoria cat02 = new Categoria(null, "Financeiro", null);
 
-        Produto produto01 = new Produto(null, "Computador", 3.8, null);
-        Produto produto02 = new Produto(null, "Impressora", 3.8, null);
-        Produto produto03 = new Produto(null, "Mouse", 3.8, null);
+        Produto produto01 = new Produto(null, "Computador", 3.8, null, null);
+        Produto produto02 = new Produto(null, "Impressora", 3.8, null, null);
+        Produto produto03 = new Produto(null, "Mouse", 3.8, null, null);
         produtoRepository.saveAll(Arrays.asList(produto01,produto02,produto03));
 
         //        Set<Produto> produtos = new HashSet<>();
@@ -96,8 +98,8 @@ public class SpringIonicApplication implements CommandLineRunner {
         enderecoRepository.saveAll(Arrays.asList(end01,end02));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Pedido ped01 = new Pedido(null, sdf.parse("20/02/2021 10:20"), null, cli, end01);
-        Pedido ped02 = new Pedido(null, sdf.parse("19/02/2021 10:20"), null, cli, end02);
+        Pedido ped01 = new Pedido(null, sdf.parse("20/02/2021 10:20"), null, cli, end01, null);
+        Pedido ped02 = new Pedido(null, sdf.parse("19/02/2021 10:20"), null, cli, end02, null);
 
         Pagamento pag01 = new PagamentoComCartao(null, EstadoPagamentoEnum.PENDENTE, ped01, 3, sdf.parse("21/02/2021 11:22"));
         ped01.setPagamento(pag01);
@@ -109,5 +111,18 @@ public class SpringIonicApplication implements CommandLineRunner {
 
         pedidoRepository.saveAll(Arrays.asList(ped01,ped02));
         pagamentoRepository.saveAll(Arrays.asList(pag01,pag02));
+
+        ItemPedido ip01 = new ItemPedido(ped01,produto01,0.00,1, 200.0);
+        ItemPedido ip02 = new ItemPedido(ped01,produto03,0.00,2, 80.0);
+        ItemPedido ip03 = new ItemPedido(ped02,produto02,100.00,1, 150.0);
+
+        ped01.getItemPedidoSet().addAll(Arrays.asList(ip01,ip02));
+        ped02.getItemPedidoSet().addAll(Arrays.asList(ip01,ip03));
+
+        produto01.getItemPedidoSet().addAll(Arrays.asList(ip01));
+        produto02.getItemPedidoSet().addAll(Arrays.asList(ip03));
+        produto03.getItemPedidoSet().addAll(Arrays.asList(ip02));
+
+        itemPedidoRepository.saveAll(Arrays.asList(ip01,ip02,ip03));
     }
 }

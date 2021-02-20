@@ -1,6 +1,7 @@
 package br.com.project.springionic.controller.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,9 +28,22 @@ public class Produto implements Serializable {
     private Integer id;
     private String nome;
     private Double preco;
+
     @OneToMany(mappedBy = "produto")
     private Set<ProdutoCategoria> categoriasProduto = new HashSet<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itemPedidoSet = new HashSet<>();
+
+    @JsonIgnore
+    public List<Pedido> getPedidos(){
+        List<Pedido> pedidos = new ArrayList<>();
+        for(ItemPedido x : itemPedidoSet){
+            pedidos.add(x.getPedido());
+        }
+        return pedidos;
+    }
 //    @JsonBackReference
 //    @ManyToMany
 //    @JoinTable(name = "PRODUTO_CATEGORIA",

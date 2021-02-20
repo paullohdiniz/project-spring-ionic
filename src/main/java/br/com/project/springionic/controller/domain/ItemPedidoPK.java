@@ -1,32 +1,29 @@
 package br.com.project.springionic.controller.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pagamento implements Serializable {
+@Embeddable
+public class ItemPedidoPK implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private EstadoPagamentoEnum estado;
-    @JsonBackReference
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pedido_id")
-    @MapsId
     private Pedido pedido;
 
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 }

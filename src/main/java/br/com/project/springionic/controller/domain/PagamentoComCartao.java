@@ -1,5 +1,6 @@
 package br.com.project.springionic.controller.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +19,7 @@ public class PagamentoComCartao extends Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer numeroParcelas;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataPagamento;
 
     public PagamentoComCartao(Integer id, EstadoPagamentoEnum estado, Pedido pedido, Integer numeroParcelas, Date dataPagamento) {
