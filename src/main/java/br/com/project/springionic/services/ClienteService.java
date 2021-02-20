@@ -20,7 +20,6 @@ public class ClienteService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Nao Encontado"));
     }
 
-    
     public List<Cliente> findAll(){
         List<Cliente> clientList = clienteRepository.findAll();
         return clientList;
