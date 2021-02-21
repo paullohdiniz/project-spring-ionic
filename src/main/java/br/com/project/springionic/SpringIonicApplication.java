@@ -111,17 +111,17 @@ public class SpringIonicApplication implements CommandLineRunner {
 
         pedidoRepository.saveAll(Arrays.asList(ped01,ped02));
         pagamentoRepository.saveAll(Arrays.asList(pag01,pag02));
-
+//
         ItemPedido ip01 = new ItemPedido(ped01,produto01,0.00,1, 200.0);
         ItemPedido ip02 = new ItemPedido(ped01,produto03,0.00,2, 80.0);
         ItemPedido ip03 = new ItemPedido(ped02,produto02,100.00,1, 150.0);
 
-        ped01.getItemPedidoSet().addAll(Arrays.asList(ip01,ip02));
-        ped02.getItemPedidoSet().addAll(Arrays.asList(ip01,ip03));
+        ped01.setItemPedidoSet(Arrays.asList(ip01,ip02));
+        ped02.setItemPedidoSet(Arrays.asList(ip01,ip03));
 
-        produto01.getItemPedidoSet().addAll(Arrays.asList(ip01));
-        produto02.getItemPedidoSet().addAll(Arrays.asList(ip03));
-        produto03.getItemPedidoSet().addAll(Arrays.asList(ip02));
+        produto01.setItemPedidoSet(Arrays.asList(ip01));
+        produto02.setItemPedidoSet(Arrays.asList(ip03));
+        produto03.setItemPedidoSet(Arrays.asList(ip02));
 
         itemPedidoRepository.saveAll(Arrays.asList(ip01,ip02,ip03));
     }
