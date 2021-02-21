@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @AllArgsConstructor
@@ -43,5 +41,5 @@ public class Pedido implements Serializable {
     private Endereco endereco;
 
     @OneToMany(mappedBy = "id.produto")
-    private Set<ItemPedido> itemPedidoSet = new HashSet<>();
+    private List<ItemPedido> itemPedidoSet = new ArrayList<>();
 }
