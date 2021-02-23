@@ -25,4 +25,11 @@ public class CategoriaService {
         List<Categoria> categoriaList = categoriaRepository.findAll();
         return categoriaList;
     }
+    public Categoria insert(final Categoria categoria){
+        categoria.setId(null);
+        return categoriaRepository.save(categoria);
+    }
+    public Categoria update(final Categoria categoria){
+        return categoriaRepository.save(categoria);
+    }
 }

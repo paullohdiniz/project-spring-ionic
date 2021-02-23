@@ -6,23 +6,23 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.net.PasswordAuthentication;
 import java.util.List;
 
-@Component
+//@Component
 public class DataInitializr implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private UserRepository userRepository;
 
-    //@Autowired
-    //private PasswordEncode passwordEncode;
+    //private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(16);
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         List<User> users = userRepository.findAll();
         if(users.isEmpty()){
-            this.createUser("Paulo Diniz","paullohdiniz@gmail.com","1234");
+            this.createUser("Paulo Diniz","paullohdiniz@gmail.com","1254");
         }
     }
     private void createUser(String name, String email, String password){
