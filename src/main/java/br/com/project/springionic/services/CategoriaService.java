@@ -2,6 +2,7 @@ package br.com.project.springionic.services;
 
 import br.com.project.springionic.controller.domain.Categoria;
 import br.com.project.springionic.repository.CategoriaRepository;
+import br.com.project.springionic.services.exception.DataIntegrityException;
 import br.com.project.springionic.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,16 @@ public class CategoriaService {
     }
     public Categoria update(final Categoria categoria){
         return categoriaRepository.save(categoria);
+    }
+    public void delete(final Integer id){
+        ///Tem tratamento de exceçao
+        findById(id);
+        try{
+            categoriaRepository.deleteById(id);
+        }
+        catch (DataIntegrityException ex){
+            throw new DataIntegrityException("Nao e possivel excluir categoria do produto.");
+        }
+
     }
 }

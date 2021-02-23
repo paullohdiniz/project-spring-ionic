@@ -48,4 +48,10 @@ public class CategoriaController {
         Categoria categoriaResponse = categoriaService.update(categoria);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<Void> delete(@PathVariable final Integer id){
+        categoriaService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
