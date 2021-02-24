@@ -54,8 +54,12 @@ public class CategoriaService {
 
     }
     public Page<CategoriaDTO> findAllPerPage(Integer page, Integer linePerPage, String orderBy, String direction){
-        PageRequest pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
+        Pageable pageRequest = PageRequest.of(page, linePerPage, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest)
                 .map(cat -> new CategoriaDTO(cat.getId(),cat.getNome()));
+    }
+
+    public Categoria fromCategoria(CategoriaDTO categoriaDTO){
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome(), null);
     }
 }
