@@ -43,4 +43,10 @@ public class Cliente implements Serializable {
     @JsonBackReference
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
+
+    public Cliente(Integer id, String nome, String email){
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
 }
