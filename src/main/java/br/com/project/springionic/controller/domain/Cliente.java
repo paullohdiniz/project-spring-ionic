@@ -48,5 +48,8 @@ public class Cliente implements Serializable {
         this.id = id;
         this.nome = nome;
         this.email = email;
+        this.tipoClienteEnum = null;
+        this.telefones = null;
+        this.pedidos = null;
     }
 }

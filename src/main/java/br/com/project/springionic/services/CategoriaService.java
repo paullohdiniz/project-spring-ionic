@@ -1,6 +1,7 @@
 package br.com.project.springionic.services;
 
 import br.com.project.springionic.controller.domain.Categoria;
+import br.com.project.springionic.controller.domain.Cliente;
 import br.com.project.springionic.dto.CategoriaDTO;
 import br.com.project.springionic.repository.CategoriaRepository;
 import br.com.project.springionic.services.exception.DataIntegrityException;
@@ -40,8 +41,15 @@ public class CategoriaService {
         return categoriaRepository.save(categoria);
     }
     public Categoria update(final Categoria categoria){
-        return categoriaRepository.save(categoria);
+        Categoria newCategoria = findById(categoria.getId());
+        udpateData(newCategoria, categoria);
+        return categoriaRepository.save(newCategoria);
     }
+
+    private void udpateData(Categoria newCategoria, Categoria categoria) {
+        newCategoria.setNome(categoria.getNome());
+    }
+
     public void delete(final Integer id){
         ///Tem tratamento de exceçao
         findById(id);
