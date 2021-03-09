@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StandarError implements Serializable {
+public class StandError implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

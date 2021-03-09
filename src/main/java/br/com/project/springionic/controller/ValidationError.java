@@ -9,7 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Data
-public class ValidationError extends StandarError implements Serializable {
+public class ValidationError extends StandError implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

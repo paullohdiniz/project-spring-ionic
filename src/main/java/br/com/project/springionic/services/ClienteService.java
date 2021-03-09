@@ -35,13 +35,22 @@ public class ClienteService {
                 .map(cliente ->
                         new ClienteDTO(cliente.getId(),cliente.getNome(), cliente.getEmail())).collect(Collectors.toList());
     }
-    public Cliente insert(final Cliente Cliente){
-        Cliente.setId(null);
-        return clienteRepository.save(Cliente);
+    public Cliente insert(final Cliente cliente){
+        cliente.setId(null);
+        return clienteRepository.save(cliente);
     }
-    public Cliente update(final Cliente Cliente){
-        return clienteRepository.save(Cliente);
+
+    public Cliente update(final Cliente cliente){
+        Cliente newCli = findById(cliente.getId());
+        udpateData(newCli, cliente);
+        return clienteRepository.save(newCli);
     }
+
+    private void udpateData(Cliente newCli, Cliente cliente) {
+        newCli.setNome(cliente.getNome());
+        newCli.setEmail(cliente.getEmail());
+    }
+
     public void delete(final Integer id){
         ///Tem tratamento de exceçao
         findById(id);
