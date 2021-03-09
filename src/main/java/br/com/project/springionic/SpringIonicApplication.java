@@ -10,7 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class SpringIonicApplication implements CommandLineRunner {
@@ -35,6 +38,9 @@ public class SpringIonicApplication implements CommandLineRunner {
     private PagamentoRepository pagamentoRepository;
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+    @Autowired
+    private UserRepository userRepository;
+
 
     public static void main(String[] args) {
         SpringApplication.run(SpringIonicApplication.class, args);
@@ -43,6 +49,7 @@ public class SpringIonicApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        createUser();
         Categoria cat01 = new Categoria(null, "Informatica",null);
         Categoria cat02 = new Categoria(null, "Financeiro", null);
 
@@ -124,5 +131,15 @@ public class SpringIonicApplication implements CommandLineRunner {
         produto03.setItemPedidoSet(Arrays.asList(ip02));
 
         itemPedidoRepository.saveAll(Arrays.asList(ip01,ip02,ip03));
+    }
+
+    private void createUser() {
+        List<User> users = Stream.of(
+          new User(null, "Paulo Diniz", "paullohdiniz@gmail.com","1234"),
+          new User(null, "Kelly Diniz", "kellydiniz@gmail.com","1234")
+        ).collect(Collectors.toList());
+
+        userRepository.saveAll(users);
+
     }
 }

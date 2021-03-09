@@ -29,6 +29,11 @@ public class UserController {
         return userService.findAll(pageable);
     }
 
+    @GetMapping("/")
+    public List<User> welcome(){
+        return userService.findAll();
+    }
+
     @PostMapping
     public User save(@RequestBody User user){
         return userService.save(user);
