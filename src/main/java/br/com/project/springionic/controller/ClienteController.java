@@ -58,7 +58,7 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/pagination")
     public ResponseEntity<Page<ClienteDTO>> listarPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linePerPage", defaultValue = "10") Integer linePerPage,
