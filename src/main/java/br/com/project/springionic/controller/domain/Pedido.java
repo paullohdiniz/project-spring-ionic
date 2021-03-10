@@ -41,5 +41,13 @@ public class Pedido implements Serializable {
     private Endereco endereco;
 
     @OneToMany(mappedBy = "id.produto")
-    private List<ItemPedido> itemPedidoSet = new ArrayList<>();
+    private List<ItemPedido> itensPedido = new ArrayList<>();
+
+    public double getValorTotal() {
+        double soma = 0.0;
+        for (ItemPedido ip : this.itensPedido) {
+            soma = soma + ip.getSubTotal();
+        }
+        return soma;
+    }
 }
