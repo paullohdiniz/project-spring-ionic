@@ -2,6 +2,7 @@ package br.com.project.springionic.controller;
 
 import br.com.project.springionic.controller.domain.Cliente;
 import br.com.project.springionic.dto.ClienteDTO;
+import br.com.project.springionic.dto.ClienteNewDTO;
 import br.com.project.springionic.services.ClienteService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +44,15 @@ public class ClienteController {
                 .buildAndExpand(clienteResponse.getId())
                 .toUri();
 
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO cliente) {
+        Cliente obj = clienteService.fromDTONewClientes(cliente);
+        obj = clienteService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

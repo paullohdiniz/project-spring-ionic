@@ -94,7 +94,7 @@ public class SpringIonicApplication implements CommandLineRunner {
         telefones.add("11948475478");
         telefones.add("11958652145");
 
-        Cliente cli = new Cliente(null, "Paulo Diniz", "paullo@gmail.com", "05503455575", TipoClienteEnum.PESSOA_FISICA,null, telefones, null);
+        Cliente cli = new Cliente(null, "Paulo Diniz", "paullo@gmail.com", "05503455575", TipoClienteEnum.PESSOA_FISICA, null, telefones);
 
         Endereco end01 = new Endereco(null, "Rua Flores","400","Apt 01", "Jardim", "011652145", cli, cid01);
         Endereco end02 = new Endereco(null, "Rua Ministro","25","Beco", "Jardins", "05365215", cli, cid02);

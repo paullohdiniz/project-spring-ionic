@@ -1,6 +1,7 @@
 package br.com.project.springionic.controller.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,12 +29,18 @@ public class Cliente implements Serializable {
     private Integer id;
 
     private String nome;
+
+    @Column(unique = true)
     private String email;
+
     private String cpfCnpj;
     private TipoClienteEnum tipoClienteEnum;
 
+    @JsonIgnore
+    private String senha;
+
     @JsonManagedReference
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
@@ -51,5 +58,28 @@ public class Cliente implements Serializable {
         this.tipoClienteEnum = null;
         this.telefones = null;
         this.pedidos = null;
+    }
+
+    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoClienteEnum tipo, String senha) {
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpfCnpj = cpfOuCnpj;
+        this.tipoClienteEnum = tipo;
+        this.senha = senha;
+        //addPerfil(Perfil.CLIENTE);
+    }
+
+    public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoClienteEnum tipo, String senha, Set<String> telefones) {
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpfCnpj = cpfOuCnpj;
+        this.tipoClienteEnum = tipo;
+        this.senha = senha;
+        this.telefones = telefones;
+        //addPerfil(Perfil.CLIENTE);
     }
 }
