@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-//@Component
+@Component
 public class DataInitializr implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
@@ -22,7 +22,7 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         List<User> users = userRepository.findAll();
         if(users.isEmpty()){
-            this.createUser("Paulo Diniz","paullohdiniz@gmail.com","1254");
+            this.createUser("paulohdiniz","paulohdiniz@gmail.com","1254");
         }
     }
     private void createUser(String name, String email, String password){
