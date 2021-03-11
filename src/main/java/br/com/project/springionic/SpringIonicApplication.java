@@ -123,8 +123,8 @@ public class SpringIonicApplication implements CommandLineRunner {
         ItemPedido ip02 = new ItemPedido(ped01,produto03,0.00,2, 80.0);
         ItemPedido ip03 = new ItemPedido(ped02,produto02,100.00,1, 150.0);
 
-        ped01.setItemPedidoSet(Arrays.asList(ip01,ip02));
-        ped02.setItemPedidoSet(Arrays.asList(ip01,ip03));
+        ped01.setItensPedido(Arrays.asList(ip01,ip02));
+        ped02.setItensPedido(Arrays.asList(ip01,ip03));
 
         produto01.setItemPedidoSet(Arrays.asList(ip01));
         produto02.setItemPedidoSet(Arrays.asList(ip03));

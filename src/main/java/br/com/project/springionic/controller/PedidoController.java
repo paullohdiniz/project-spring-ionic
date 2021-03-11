@@ -24,18 +24,18 @@ public class PedidoController {
         this.pedidoService = pedidoService;
     }
 
-    @GetMapping
-    public List<Pedido> listar(){
-        return pedidoService.findAll();
-    }
+//    @GetMapping
+//    public List<Pedido> listar(){
+//        return pedidoService.findAll();
+//    }
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Pedido> findPedido(@PathVariable final Integer id){
         Pedido pedidoResponse = pedidoService.findById(id);
         return ResponseEntity.ok().body(pedidoResponse);
     }
 
-    @RequestMapping(method=RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<Page<Pedido>> findPage(
             @RequestParam(value="page", defaultValue="0") Integer page,
             @RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
@@ -45,7 +45,7 @@ public class PedidoController {
         return ResponseEntity.ok().body(list);
     }
 
-    @RequestMapping(method=RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) {
         obj = pedidoService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
