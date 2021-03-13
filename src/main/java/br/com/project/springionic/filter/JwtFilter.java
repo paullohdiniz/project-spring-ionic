@@ -1,5 +1,6 @@
 package br.com.project.springionic.filter;
 
+import br.com.project.springionic.services.UserDetailServiceCustom;
 import br.com.project.springionic.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private UserDetailsService service;
+    private UserDetailServiceCustom service;
 
 
     @Override

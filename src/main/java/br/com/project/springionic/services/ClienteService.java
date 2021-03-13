@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +27,8 @@ public class ClienteService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder pe;
+//    @Autowired
+//    private BCryptPasswordEncoder pe;
 
     public Cliente findById(Integer id){
         Optional<Cliente> obj = clienteRepository.findById(id);
@@ -82,7 +81,7 @@ public class ClienteService {
 
     public Cliente fromDTONewClientes(ClienteNewDTO objDto) {
         //TODO Ver se precisar instancia cidadeRepository
-        Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoClienteEnum.PESSOA_FISICA, pe.encode(objDto.getSenha()));
+        Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoClienteEnum.PESSOA_FISICA, objDto.getSenha());
         Estado estado = new Estado(null, "SP", null);
         Cidade cid = new Cidade(objDto.getCidadeId(), "São Paulo", estado);
         Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cli, cid);

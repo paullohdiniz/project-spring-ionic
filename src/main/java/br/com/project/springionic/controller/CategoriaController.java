@@ -59,7 +59,7 @@ public class CategoriaController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/pagination")
     public ResponseEntity<Page<CategoriaDTO>> listarPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linePerPage", defaultValue = "10") Integer linePerPage,
